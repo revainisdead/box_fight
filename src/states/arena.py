@@ -79,9 +79,6 @@ class Arena(control.State):
 
 
     def update_map(self, dt: float) -> None:
-        # Draw black background for now.
-        self.map_surf.fill(const.BLACK)
-
         self.map_surf = self.mapdef.update(dt)
 
         if setup.map_size.changed():

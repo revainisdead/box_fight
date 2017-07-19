@@ -4,11 +4,8 @@ import math
 
 import pygame as pg
 
-from .. import binds
+from .. import binds, setup
 
-
-# TODO
-w = 800
 
 class Cam:
     def __init__(self, pos=(0,0,0), rot=(0,0)):
@@ -19,7 +16,7 @@ class Cam:
     def update(self, dt, point: Optional[Tuple[int, int]]):
         if point is not None:
             x, y = point # event.rel
-            x/=(w/2); y/=(w/2)
+            x/=(setup.screen_size.get_width()/2); y/=(setup.screen_size.get_width()/2)
             self.rot[0] += y
             self.rot[1] += x
 
