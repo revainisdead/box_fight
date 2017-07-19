@@ -88,12 +88,12 @@ class Hud:
             self.y = const.IMMUTABLE_HUD_Y
 
 
-    def update(self, screen: pg.Surface, game_info: Dict[str, Any], player: pg.sprite.Sprite, map_height: int) -> None:
+    def update(self, screen: pg.Surface, game_info: Dict[str, Any], player: pg.sprite.Sprite) -> None:
         self.update_sizes()
 
         # Don't need game_info for clock but will still need it later.
         self.update_clock()
-        self.update_coords(player.rect.x, player.rect.y, map_height)
+        self.update_coords(player.rect.x, player.rect.y)
 
         self.render_clock(screen)
         self.render_coords(screen)
@@ -112,8 +112,8 @@ class Hud:
         self.clock = time
 
 
-    def update_coords(self, x: int, y: int, map_height: int) -> None:
-        self.coords = "({}, {})".format(x, map_height - y)
+    def update_coords(self, x: int, y: int) -> None:
+        self.coords = "({}, {})".format(x, y)
 
 
     def render_clock(self, surface: pg.Surface) -> None:

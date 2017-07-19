@@ -7,6 +7,9 @@ import pygame as pg
 from .. import binds
 
 
+# TODO
+w = 800
+
 class Cam:
     def __init__(self, pos=(0,0,0), rot=(0,0)):
         self.pos = list(pos)
@@ -15,7 +18,7 @@ class Cam:
 
     def update(self, dt, point: Optional[Tuple[int, int]]):
         if point is not None:
-            x, y = event.rel
+            x, y = point # event.rel
             x/=(w/2); y/=(w/2)
             self.rot[0] += y
             self.rot[1] += x
