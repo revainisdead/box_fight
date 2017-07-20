@@ -13,16 +13,25 @@ class Cam:
         self.rot = list(rot)
 
 
+    def update_rot(self, dpos: Tuple[int, int]) -> None:
+        x, y = dpos
+        # Calculate how far the mouse moved compared to the size
+        # of the screen.
+        x/=(setup.screen_size.get_width()/2)
+        y/=(setup.screen_size.get_width()/2)
+
+        # Add y to x and x to y.
+        self.rot[0] += y
+        self.rot[1] += x
+
+
     def update(self, dt, dpos: Optional[Tuple[int, int]]):
         """
         dt: delta time
         dpos: delta position
         """
         if dpos is not None:
-            x, y = dpos
-            x/=(setup.screen_size.get_width()/2); y/=(setup.screen_size.get_width()/2)
-            self.rot[0] += y
-            self.rot[1] += x
+            self.update_rot(dpos)
 
         s = dt * 10
 

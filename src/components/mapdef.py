@@ -28,12 +28,12 @@ class MapDef:
             z -= camera.CAM.pos[2]
 
             # Rotate on the y axis first, then on the x axis.
-            x, z = calc.rotate2d((x, z), camera.CAM.rot[1])
-            y, z = calc.rotate2d((y, z), camera.CAM.rot[0])
+            x, z = calc.rotate2d((x, z), camera.CAM.rot[1]*const.RADIAN_MULT)
+            y, z = calc.rotate2d((y, z), camera.CAM.rot[0]*const.RADIAN_MULT)
             vert_list += [(x, y, z)]
 
             # Handle sensitivity of mouse point
-            f = (setup.screen_size.get_width()/2)/z
+            f = (setup.screen_size.get_width()/2 - const.FOV_DELTA)/z
 
             x, y = x*f, y*f
             screen_points += [(int(setup.screen_size.get_width()/2 + int(x)), int(setup.screen_size.get_height()/2 + int(y)))]

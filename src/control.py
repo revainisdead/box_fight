@@ -1,5 +1,6 @@
 from typing import Any, Dict
 
+import sys
 import time
 
 import pygame as pg
@@ -34,13 +35,16 @@ class Control:
 
             binds.INPUT.reset()
 
+        # Game loop is quit by checking for when the quit
+        # is set to True, when game loop exist end gracefully
+        # but unloading pygame and using a system exit.
+        pg.quit()
+        sys.exit()
+
 
     def event_loop(self) -> None:
         for event in pg.event.get():
-            if event.type == pg.QUIT:
-                self.quit = True
-            else:
-                binds.INPUT.update(event)
+            binds.INPUT.update(event)
 
 
     def update(self, dt: float) -> None:

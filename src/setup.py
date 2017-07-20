@@ -130,9 +130,13 @@ class MapSize:
 
 
 def start():
-    #os.environ["SDL_VIDEO_CENTERED"] = "1"
+    os.environ["SDL_VIDEO_CENTERED"] = "1"
     pg.init()
     pg.font.init()
+
+    # Mouse
+    pg.mouse.set_visible(0)
+    pg.event.set_grab(1)
 
     # Initialize screen
     _ = pg.display.set_mode(const.DEFAULT_SCREEN_SIZE, pg.RESIZABLE)
