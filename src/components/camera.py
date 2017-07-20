@@ -13,9 +13,13 @@ class Cam:
         self.rot = list(rot)
 
 
-    def update(self, dt, point: Optional[Tuple[int, int]]):
-        if point is not None:
-            x, y = point # event.rel
+    def update(self, dt, dpos: Optional[Tuple[int, int]]):
+        """
+        dt: delta time
+        dpos: delta position
+        """
+        if dpos is not None:
+            x, y = dpos
             x/=(setup.screen_size.get_width()/2); y/=(setup.screen_size.get_width()/2)
             self.rot[0] += y
             self.rot[1] += x

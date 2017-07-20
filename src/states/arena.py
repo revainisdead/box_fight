@@ -18,13 +18,15 @@ class Arena(control.State):
     def __init__(self) -> None:
         super().__init__()
         self.collidable_group = pg.sprite.Group()
-        self.setup_map()
 
 
     def startup(self, game_info: Dict[str, Any]) -> None:
         self.game_info = game_info
         self.state = const.MainState.arena
 
+        # Map setup needs to happen on startup, so it reads the screen size
+        # the time that play is pressed.
+        self.setup_map()
         self.setup_player()
         self.setup_hud()
 
@@ -33,7 +35,7 @@ class Arena(control.State):
         self.mapdef = mapdef.MapDef()
         self.map_surf = self.mapdef.update(0)
 
-        self.entire_area = pg.Surface((800, 800)).convert()
+        self.entire_area = pg.Surface((setup.screen_size.get_width(), setup.screen_size.get_height())).convert()
         #self.entire_area_rect = self.entire_area.get_rect()
 
 
@@ -68,7 +70,7 @@ class Arena(control.State):
 
 
     def move_camera(self, dt: float) -> None:
-        camera.CAM.update(dt, binds.INPUT.mouse_pos())
+        camera.CAM.update(dt, binds.INPUT.mouse_pos_change())
 
 
     def update_sizes(self) -> None:

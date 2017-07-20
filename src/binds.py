@@ -66,9 +66,10 @@ class Input:
     def __init__(self):
         self.__last_keys_pressed = []
         self.__held_keys = tuple(0 for _ in range(const.PG_GET_PRESSED_LENGTH))
-        self.__mouse_pos = (0, 0)
-        self.__last_mouse_click = (0, 0)
-        self.__last_mouse_drop = (0, 0)
+        self.__mouse_pos = None
+        self.__mouse_pos_change = None
+        self.__last_mouse_click = None
+        self.__last_mouse_drop = None
 
 
     def __set_last_keys_pressed(self, key: Optional[int]) -> None:
@@ -89,6 +90,10 @@ class Input:
 
     def __set_mouse_pos(self, point: Optional[Tuple[int, int]]) -> None:
         self.__mouse_pos = point
+
+
+    def __set_mouse_pos_change(self, point: Optional[Tuple[int, int]]) -> None:
+        self.__mouse_pos_change = point
 
 
     def __set_last_mouse_click(self, point: Optional[Tuple[int, int]]) -> None:
@@ -112,8 +117,10 @@ class Input:
         elif event.type == pg.KEYUP:
             self.__set_held_keys(pg.key.get_pressed())
         elif event.type == pg.MOUSEMOTION:
-            point = pg.mouse.get_pos()
-            self.__set_mouse_pos(point)
+            # Don't save mouse position on movement unless needed.
+            #point = pg.mouse.get_pos()
+            #self.__set_mouse_pos(point)
+            self.__set_mouse_pos_change(event.rel)
         elif event.type == pg.MOUSEBUTTONDOWN:
             point = pg.mouse.get_pos()
             self.__set_last_mouse_click(point)
@@ -135,6 +142,10 @@ class Input:
 
     def mouse_pos(self) -> Optional[Tuple[int, int]]:
         return self.__mouse_pos
+
+
+    def mouse_pos_change(self) -> Optional[Tuple[int, int]]:
+        return self.__mouse_pos_change
 
 
     def last_mouse_click(self) -> Optional[Tuple[int, int]]:
@@ -159,8 +170,9 @@ class Input:
         """This should be called once per frame to reset
         keys that need to be read Once Per Frame.
         """
-        self.__set_mouse_pos(None)
         self.__set_last_keys_pressed(None)
+        self.__set_mouse_pos(None)
+        self.__set_mouse_pos_change(None)
         self.__set_last_mouse_click(None)
         self.__set_last_mouse_drop(None)
 
