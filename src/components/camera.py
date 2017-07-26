@@ -36,9 +36,10 @@ class Cam:
         s = dt * 10
 
         if binds.INPUT.held("up"):
-            self.pos[1] += s
+            #self.pos[1] += s
+            self.pos[1] -= 6
         if binds.INPUT.held("down"):
-            self.pos[1] -= s
+            self.pos[1] += s
 
         #if key[pygame.K_w]: self.pos[2] += s
         #if key[pygame.K_s]: self.pos[2] -= s
@@ -60,6 +61,10 @@ class Cam:
         if binds.INPUT.held("right"):
             self.pos[0] += y
             self.pos[2] -= x
+
+        # TODO: Gravity hack, move later.
+        if self.pos[1] < 0:
+            self.pos[1] += 2
 
 
 CAM = Cam((0, 0, -5))

@@ -19,7 +19,7 @@ from . import setup
 keybinds = {
     "forward": pg.K_w,
     "back": pg.K_s,
-    "up": pg.K_q,
+    "up": pg.K_SPACE,
     "down": pg.K_e,
     "left": pg.K_a,
     "right": pg.K_d,
