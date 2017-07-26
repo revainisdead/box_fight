@@ -13,7 +13,7 @@ class Cube:
         self.verts = [(x+X/2, y+Y/2, z+Z/2) for X, Y, Z in self.verts]
 
         # Each tint application lightens slightly
-        tint_factor = 0.1
+        tint_factor = 0.15
         self.colors = self.randomize_color(tint_factor)
 
 
