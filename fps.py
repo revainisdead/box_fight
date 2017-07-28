@@ -53,3 +53,9 @@ Each peer runs the same code:
 
 server_port = 1500
 client_port = 1501
+
+#---
+# Diff file tool.
+# Ex.
+# generate log: expected output
+# for each new log: compare to correct log and check for differences

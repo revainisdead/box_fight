@@ -12,9 +12,6 @@ class MapDef:
         self.surface = pg.Surface((setup.screen_size.get_width(), setup.screen_size.get_height())).convert()
         self.cubes = [shape.Cube((0, 4, 0)), shape.Cube((0, 6, 0)), shape.Cube((0, 8, 0)), shape.Floor()]
 
-        for cube in self.cubes:
-            print(cube.verts)
-
 
     def render(self, dt) -> None:
         """ Draw current shapes onto surface """
